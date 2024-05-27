@@ -29,9 +29,9 @@ class DBManager:
                 password="0835"
         ) as conn:
             with conn.cursor() as cur:
-                cur.execute(f"SELECT employers.company_name, vacancies.vacancies_name,"
-                            f"vacancies.payment, vacancies.url "
-                            f"FROM employers"
+                cur.execute(f"SELECT employers.company_name, vacancies.vacancies_name, "
+                            f"vacancies.payment, vacancies_url "
+                            f"FROM employers "
                             f"JOIN vacancies USING (employer_id)")
                 result = cur.fetchall()
             conn.commit()
@@ -46,7 +46,7 @@ class DBManager:
                 password="0835"
         ) as conn:
             with conn.cursor() as cur:
-                cur.execute(f"SELECT AVG(payment) as avg_payment FROM vacancies ")
+                cur.execute(f"SELECT AVG(payment) as avg_payment FROM vacancies")
                 result = cur.fetchall()
             conn.commit()
         return result
@@ -61,7 +61,7 @@ class DBManager:
         ) as conn:
             with conn.cursor() as cur:
                 cur.execute(f"SELECT * FROM vacancies "
-                            f"WHERE payment > (SELECT AVG(payment) FROM vacancies) ")
+                            f"WHERE payment > (SELECT AVG(payment) FROM vacancies)")
                 result = cur.fetchall()
             conn.commit()
         return result
@@ -77,7 +77,7 @@ class DBManager:
             with conn.cursor() as cur:
                 cur.execute(f"SELECT * FROM vacancies "
                             f"WHERE lower(vacancies_name) LIKE '%{keyword}%' "
-                            f"OR lower(vacancies_name) LIKE '%{keyword}'"
+                            f"OR lower(vacancies_name) LIKE '%{keyword}' "
                             f"OR lower(vacancies_name) LIKE '{keyword}%';")
                 result = cur.fetchall()
             conn.commit()

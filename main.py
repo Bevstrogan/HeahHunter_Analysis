@@ -2,14 +2,15 @@ from utils import create_database, add_to_table
 from db_manager import DBManager
 
 def main():
-    employers_list = []
+    employers_list = [8884, 3529, 666661, 1740, 3127, 64174, 856498, 8971731, 2537115, 53742]
     dbmanager = DBManager()
     create_database()
     add_to_table(employers_list)
 
     while True:
         task = input(
-            "----------------------------Здравствуйте---------------------------\n"
+            "\n"
+            "-----------------------------------------------------------------------\n"
             "1 - Список всех компаний и количество их вакансий\n"
             "2 - Список всех вакансий с указанием названия компании\n"
             "3 - Получить среднюю зарплату по вакансиям\n"
@@ -26,20 +27,21 @@ def main():
             print(dbmanager.get_companyies_and_vacancies_count())
             print()
 
-        if task == '2':
+        elif task == '2':
             print(dbmanager.get_all_vacancies())
             print()
 
-        if task == '3':
+        elif task == '3':
             print(dbmanager.get_avg_salary())
             print()
 
-        if task == '4':
+        elif task == '4':
             print(dbmanager.get_vacancies_with_higher_salary())
             print()
 
-        if task == '5':
-            print(dbmanager.get_vacancies_with_keyword())
+        elif task == '5':
+            keyword = input('Введите ключевое слово: ')
+            print(dbmanager.get_vacancies_with_keyword(keyword))
             print()
         else:
             print('Некорректный запрос')

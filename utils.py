@@ -5,9 +5,9 @@ def get_vacancies(employer_id):
     """Получение вакансий по API"""
 
     params = {
-        "area": 1,
+        "area": 113,
         "page": 0,
-        "per_page": 10
+        "per_page": 20
     }
     url = f"https://api.hh.ru/vacancies?employer_id={employer_id}"
     data_vacancies = requests.get(url, params=params).json()
@@ -25,7 +25,7 @@ def get_vacancies(employer_id):
         if vacancies['payment'] is not None:
             vacancies_data.append(vacancies)
 
-        return vacancies_data
+    return vacancies_data
 
 def get_employer(employer_id):
     """Получение данных о работодателе"""
